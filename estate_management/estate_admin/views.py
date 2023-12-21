@@ -50,8 +50,8 @@ def login_view(request):  # Renamed to avoid conflict with 'login' from django.c
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)  # Use auth_login here
-            return redirect('admin:index')  # Redirect to admin dashboard or a different page as required
+            return redirect('home')  # Redirect to admin dashboard or a different page as required
         else:
             messages.error(request, 'Invalid username or password.')
 
-    return render(request, 'estate_admin/login.html')
+    return render(request, 'estate_admin/index.html')
