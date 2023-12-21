@@ -16,9 +16,13 @@
               <h5 class="card-title">{{ property.name }}</h5>
               <p class="card-text">{{ property.address }}</p>
               <p class="card-text">{{ property.location }}</p>
-              <a href="{% url 'property-tenants' property_id=property.id %}">Show Tenants</a>
-
+             
+              <a href="{% url 'update_property' property_id=property.id %}"><button type="button" class="btn btn-sm btn-danger">Update Property</button></a>
+              <a href="{% url 'property-tenants' property_id=property.id %}"><button type="button" class="btn  btn-sm btn-success">Show Tenants</button>
+              </a>
+              
             </div>
+            
           </div>
         </div>
       {% endfor %}

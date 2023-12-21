@@ -16,6 +16,7 @@
             <th scope="col">Unit Type</th>
             <th scope="col">Agreement End Date</th>
             <th scope="col">Monthly Rent Date</th>
+            <th scope="col">Option</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
         <td>{{ tenant.unit_type }}</td>
         <td>{{ tenant.agreement_end_date }}</td>
         <td>{{ tenant.monthly_rent_date }}</td>
+        <td><a href="{% url 'update_tenant' tenant_id=tenant.id %}">Edit</a></td>
     </tr>
     {% empty %}
     

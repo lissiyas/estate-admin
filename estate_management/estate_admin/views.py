@@ -33,16 +33,43 @@ def add_property(request):
         form = PropertyForm()
     return render(request, 'estate_admin/add_property.html', {'form': form})
 
-@login_required
-def add_tenant(request):
-    if request.method == 'POST':
-        form = TenantForm(request.POST)
-        if form.is_valid():
-             form.save()
-             return redirect('list_tenants')  # redirect to the tenant listing page
+#----------------------------property addition /updatation-----------------
+
+def add_or_update_property(request , property_id = None):
+    if property_id:
+        property = get_object_or_404(Property, pk = property_id)
+        form = PropertyForm(request.POST or None, instance=property)
     else:
-        form = TenantForm()
-    return render(request, 'estate_admin/add_tenant.html', {'form': form})
+        property = None
+        form = PropertyForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form = PropertyForm(request.POST)
+        
+        form.save()
+        return redirect('list_properties')  # redirect to the property listing page
+    
+    return render(request, 'estate_admin/add_or_edit_property.html', {'form': form, 'property':property})
+
+#----------------------------tenants addition /updatation-----------------
+
+
+def add_or_update_tenant(request, tenant_id=None):
+    if tenant_id:
+        tenant = get_object_or_404(Tenant, pk=tenant_id)
+        form = TenantForm(request.POST or None, instance=tenant)
+    else:
+        tenant = None
+        form = TenantForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('list_tenants')  # Redirect to the tenant listing page
+
+    return render(request, 'estate_admin/add_or_edit_tenant.html', {
+        'form': form,
+        'tenant': tenant
+    })
 
 
 
