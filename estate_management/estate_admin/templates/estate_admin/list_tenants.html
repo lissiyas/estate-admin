@@ -1,0 +1,19 @@
+{% extends "estate_admin/index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<h1>Property List</h1>
+    <a href="{% url 'add_tenant' %}">Add New tenent</a>
+        <div>
+            {% for tenant in tenants %}
+            <h1>{{ tenant.name }}</h1>
+            <h2>{{ tenant.address }}</h2>
+            <!-- Add more details or links to edit/delete here -->
+        {% endfor %}
+  
+        </div>
+        
+
+{% endblock content %}

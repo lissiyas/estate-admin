@@ -1,0 +1,16 @@
+{% extends "estate_admin/index.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<h1>Property List</h1>
+    <a href="{% url 'add_property' %}">Add New Property</a>
+    <ul>
+        {% for property in properties %}
+            <li>{{ property.name }}</li>
+            <!-- Add more details or links to edit/delete here -->
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
