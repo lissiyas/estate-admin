@@ -1,20 +1,23 @@
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import PropertyForm,TenantForm
 from .models import Property, Tenant
 
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def list_properties(request):
     properties = Property.objects.all()
     return render(request, 'estate_admin/list_properties.html', {'properties': properties})
 
 
-
+@login_required
 def list_tenants(request):
     tenants = Tenant.objects.all()
     return render(request, 'estate_admin/list_tenants.html', {'tenants': tenants})
 
+@login_required
 def add_property(request):
     if request.method == 'POST':
         form = PropertyForm(request.POST)
@@ -25,6 +28,7 @@ def add_property(request):
         form = PropertyForm()
     return render(request, 'estate_admin/add_property.html', {'form': form})
 
+@login_required
 def add_tenant(request):
     if request.method == 'POST':
         form = TenantForm(request.POST)
@@ -55,3 +59,8 @@ def login_view(request):  # Renamed to avoid conflict with 'login' from django.c
             messages.error(request, 'Invalid username or password.')
 
     return render(request, 'estate_admin/index.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

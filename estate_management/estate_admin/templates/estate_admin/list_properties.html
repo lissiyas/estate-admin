@@ -4,13 +4,27 @@
 
 {% block content %}
 
-<h1>Property List</h1>
-    <a href="{% url 'add_property' %}">Add New Property</a>
-    <ul>
-        {% for property in properties %}
-            <li>{{ property.name }}</li>
-            <!-- Add more details or links to edit/delete here -->
-        {% endfor %}
-    </ul>
+
+<div class="container">
+
+    <h1 class="mt-4 mb-2">Property List</h1>
+    {% for property in properties %}
+    <div class="card text-center">
+        <div class="card-header">
+          Featured
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ property.name }}</h5>
+          <p class="card-text">{{ property.address }}</p>
+          <p class="card-text">{{ property.location}}</p>
+          <a href="#" class="btn btn-primary">{{ property.name }}</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+          2 days ago
+        </div>
+      </div>
+      {% endfor %}
+
+</div>
 
 {% endblock content %}
