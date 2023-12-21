@@ -12,4 +12,4 @@ class PropertyForm(forms.ModelForm):
 class TenantForm(forms.ModelForm):
     class Meta:
         model = Tenant
-        fields = ['name', 'address']
+        fields = ['name', 'address','property','unit_type','agreement_end_date','monthly_rent_date']

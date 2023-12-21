@@ -4,26 +4,26 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'estate_admin/list_properties.css' %}">
 
 <div class="container">
-
     <h1 class="mt-4 mb-2">Property List</h1>
-    {% for property in properties %}
-    <div class="card text-center">
-        <div class="card-header">
-          Featured
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for property in properties %}
+        <div class="col">
+          <div class="card equal-card ">
+            <div class="card-body">
+              <h5 class="card-title">{{ property.name }}</h5>
+              <p class="card-text">{{ property.address }}</p>
+              <p class="card-text">{{ property.location }}</p>
+              <a href="{% url 'property-tenants' property_id=property.id %}">Show Tenants</a>
+
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ property.name }}</h5>
-          <p class="card-text">{{ property.address }}</p>
-          <p class="card-text">{{ property.location}}</p>
-          <a href="#" class="btn btn-primary">{{ property.name }}</a>
-        </div>
-        <div class="card-footer text-body-secondary">
-          2 days ago
-        </div>
-      </div>
       {% endfor %}
+    </div>
+    
 
 </div>
 

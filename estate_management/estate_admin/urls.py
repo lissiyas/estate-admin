@@ -8,9 +8,10 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),  # Updated to 'login_view'
     path('properties/', views.list_properties, name='list_properties'),
     path('add-properties/', views.add_property, name='add_property'),
-     path('add-tenant/', views.add_tenant, name='add_tenant'),
-     path('list-tenant/', views.list_tenants, name='list_tenants'),
-     path('logout/', views.logout_view, name='logout'),
+    path('add-tenant/', views.add_tenant, name='add_tenant'),
+    path('list-tenant/', views.list_tenants, name='list_tenants'),
+    path('logout/', views.logout_view, name='logout'),
+    path('properties/<int:property_id>/tenants/', views.property_tenants, name='property-tenants'),
 ]
 
 if settings.DEBUG:

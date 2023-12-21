@@ -6,12 +6,34 @@
 
 <h1>Property List</h1>
     <a href="{% url 'add_tenant' %}">Add New tenent</a>
-        <div>
-            {% for tenant in tenants %}
-            <h1>{{ tenant.name }}</h1>
-            <h2>{{ tenant.address }}</h2>
-            <!-- Add more details or links to edit/delete here -->
+    {% for unit_type, tenants in tenants_by_unit_type.items %}
+    <h2>{{ unit_type }}</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Property</th>
+            <th>Agreement End Date</th>
+            <th>Monthly Rent Date</th>
+        </tr>
+        {% for tenant in tenants %}
+        <tr>
+            <td>{{ tenant.name }}</td>
+            <td>{{ tenant.address }}</td>
+            <td>
+                {% if tenant.property %}
+                    {{ tenant.property.name }}
+                {% else %}
+                    No Property
+                {% endif %}
+            </td>
+            <td>{{ tenant.agreement_end_date }}</td>
+            <td>{{ tenant.monthly_rent_date }}</td>
+        </tr>
         {% endfor %}
+    </table>
+{% endfor %}
+
   
         </div>
         

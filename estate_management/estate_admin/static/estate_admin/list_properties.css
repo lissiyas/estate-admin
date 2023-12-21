@@ -1,0 +1,13 @@
+.equal-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;  /* Adjust this height as needed */
+  }
+  
+  .equal-card .card-body {
+    flex-grow: 1;  /* Allows the card body to expand and fill the space */
+  }
+  
+  .card{
+    background-color: #B1C381;
+  }

@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login as auth_login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import PropertyForm,TenantForm
-from .models import Property, Tenant
+from .forms import PropertyForm , TenantForm
+from .models import Property, Tenant, UnitType
 
 from django.contrib.auth.decorators import login_required
 
@@ -14,8 +14,13 @@ def list_properties(request):
 
 @login_required
 def list_tenants(request):
-    tenants = Tenant.objects.all()
-    return render(request, 'estate_admin/list_tenants.html', {'tenants': tenants})
+    tenants_by_unit_type = {}
+    for unit_type in UnitType:
+        tenants_by_unit_type[unit_type.label] = Tenant.objects.filter(unit_type=unit_type.value)
+    context = {
+        'tenants_by_unit_type': tenants_by_unit_type,
+    }
+    return render(request, 'estate_admin/list_tenants.html', context)
 
 @login_required
 def add_property(request):
@@ -33,8 +38,8 @@ def add_tenant(request):
     if request.method == 'POST':
         form = TenantForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('list_tenants')  # redirect to the tenant listing page
+             form.save()
+             return redirect('list_tenants')  # redirect to the tenant listing page
     else:
         form = TenantForm()
     return render(request, 'estate_admin/add_tenant.html', {'form': form})
@@ -64,3 +69,18 @@ def login_view(request):  # Renamed to avoid conflict with 'login' from django.c
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+@login_required
+def property_tenants(request, property_id):
+    # Get the property object
+    property_obj = get_object_or_404(Property, pk=property_id)
+
+    # Get tenants for this property
+    tenants = Tenant.objects.filter(property=property_obj)
+
+    context = {
+        'property': property_obj,
+        'tenants': tenants,
+    }
+    return render(request, 'estate_admin/property_tenants.html', context)

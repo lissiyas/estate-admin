@@ -1,0 +1,30 @@
+/* Add this to your CSS file or within a <style> tag in your HTML */
+
+
+.container{
+    min-height: 100vh;
+}
+
+.bhk-group {
+    display: flex;
+    justify-content: space-between;
+}
+.bhk-input {
+    flex: 1; /* Each input takes equal width */
+    margin: 0 10px; /* Add spacing between inputs */
+}
+
+
+.login-box {
+    margin-top: 400px;
+    margin-left: 50%;
+    
+    min-width: 700px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: #EAD196;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }

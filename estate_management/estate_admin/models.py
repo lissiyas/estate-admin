@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 class Property(models.Model):
     #image = models.ImageField(default='default.jpg' , upload_to='profile_pics')
@@ -38,22 +39,19 @@ class UnitType(models.TextChoices):
 class Tenant(models.Model):
     name = models.CharField(max_length=255)
     address = models.TextField()
-    #document = models.FileField(upload_to='tenant_documents/', null=True, blank=True)  # Updated upload path
-
-    def __str__(self):
-        return self.name
-
-class RentalAgreement(models.Model):
-    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.SET_NULL, null=True, blank=True)
     unit_type = models.CharField(max_length=5, choices=UnitType.choices, default=UnitType.ONE_BHK)
-    agreement_end_date = models.DateField()  # Corrected spelling
-    monthly_rent_date = models.DateField()
+    agreement_end_date = models.DateField(default=datetime.date.today)  # Corrected spelling
+    monthly_rent_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return f"{self.tenant.name} - {self.property.name if self.property else 'No Property'} - {self.unit_type}"
+        return f"{self.name} - {self.property.name if self.property else 'No Property'} - {self.unit_type}"
 
     def save(self, *args, **kwargs):
         if self.pk is None and self.property:  # Check if this is a new agreement and property is set
             self.property.allocate_flat(self.unit_type)
         super().save(*args, **kwargs)
+    #document = models.FileField(upload_to='tenant_documents/', null=True, blank=True)  # Updated upload path
+
+   
+

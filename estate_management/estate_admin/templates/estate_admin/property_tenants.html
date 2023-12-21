@@ -1,0 +1,44 @@
+
+{% extends "estate_admin/index.html" %}
+{% load static %}
+
+
+{% block content %}
+<h1>Tenants of {{ property.name }}</h1>
+
+
+<table border="2" class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Sl No:</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Unit Type</th>
+            <th scope="col">Agreement End Date</th>
+            <th scope="col">Monthly Rent Date</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for tenant in tenants %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ tenant.name }}</td>
+        <td>{{ tenant.address }}</td>
+        <td>{{ tenant.unit_type }}</td>
+        <td>{{ tenant.agreement_end_date }}</td>
+        <td>{{ tenant.monthly_rent_date }}</td>
+    </tr>
+    {% empty %}
+    
+    <tr>
+        <td colspan="5">No tenants found for this property.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+{% endblock content %}
