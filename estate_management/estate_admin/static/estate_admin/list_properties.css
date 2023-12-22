@@ -1,4 +1,9 @@
-.equal-card {
+  .container{
+    min-height: 100vh;
+  }
+  
+  
+  .equal-card {
     display: flex;
     flex-direction: column;
     height: 100%;  /* Adjust this height as needed */

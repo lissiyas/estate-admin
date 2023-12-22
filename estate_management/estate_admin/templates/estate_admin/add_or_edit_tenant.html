@@ -9,7 +9,7 @@
 
 
 <div class="container"> 
-<div class="login-box">
+<div class="login-box justify-content-center ">
     <h1>Add New Tenant</h1>
     <form method="post">
         {% csrf_token %}
@@ -29,6 +29,7 @@
             <label for="id_unit_type" class="form-label">Unit Type</label>
             {{ form.unit_type }}
         </div>
+        
         <div class="mb-3">
             <label for="id_agreement_end_date" class="form-label">Agreement End Date</label>
             {{ form.agreement_end_date }}

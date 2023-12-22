@@ -4,66 +4,106 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'estate_admin/add_properties.css' %}">
+<link rel="stylesheet" href="{% static 'estate_admin/add_or_edit_properties.css' %}">
 <div class="container">
-    <div class="addproperty-box">
-        <h1>Add New Property</h1>
-        <!-- property_form.html -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="addproperty-box">
+                <h1>Add New Property</h1>
+                <!-- property_form.html -->
 
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-            <div class="mb-3">
-                <label for="id_name" class="form-label">Name:</label>
-                <input type="text" name="name" id="id_name" class="form-control" value="{{ form.name.value }}">
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Name:</label>
+                        <input type="text" name="name" id="id_name" class="form-control" value="{{ form.name.value }}">
+                    </div>
+
+                    <!-- Repeat for other fields -->
+                    <div class="mb-3">
+                        <label for="id_address" class="form-label">Address:</label>
+                        <textarea name="address" id="id_address"
+                            class="form-control">{{ form.address.value }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_location" class="form-label">Location:</label>
+                        <textarea name="location" id="id_location"
+                            class="form-control">{{ form.location.value }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_features" class="form-label">Features:</label>
+                        <textarea name="features" id="id_features"
+                            class="form-control">{{ form.features.value }}</textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <!-- 1BHK Fields -->
+                        <div class="bhk-group">
+                            <div class="mb-3">
+                                <label for="id_flats_1bhk" class="form-label">1BHK Flats</label>
+                                <input type="text" name="flats_1bhk" id="id_flats_1bhk" class="form-control"
+                                    value="{{ form.flats_1bhk.value }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_cost_1bhk" class="form-label">1BHK Cost</label>
+                                <input type="text" name="cost_1bhk" id="id_cost_1bhk" class="form-control"
+                                    value="{{ form.cost_1bhk.value }}">
+                            </div>
+                        </div>
+
+                        <!-- 2BHK Fields -->
+                        <div class="bhk-group">
+                            <div class="mb-3">
+                                <label for="id_flats_2bhk" class="form-label">2BHK Flats</label>
+                                <input type="text" name="flats_2bhk" id="id_flats_2bhk" class="form-control"
+                                    value="{{ form.flats_2bhk.value }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_cost_2bhk" class="form-label">2BHK Cost</label>
+                                <input type="text" name="cost_2bhk" id="id_cost_2bhk" class="form-control"
+                                    value="{{ form.cost_2bhk.value }}">
+                            </div>
+                        </div>
+
+                        <!-- 3BHK Fields -->
+                        <div class="bhk-group">
+                            <div class="mb-3">
+                                <label for="id_flats_3bhk" class="form-label">3BHK Flats</label>
+                                <input type="text" name="flats_3bhk" id="id_flats_3bhk" class="form-control"
+                                    value="{{ form.flats_3bhk.value }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_cost_3bhk" class="form-label">3BHK Cost</label>
+                                <input type="text" name="cost_3bhk" id="id_cost_3bhk" class="form-control"
+                                    value="{{ form.cost_3bhk.value }}">
+                            </div>
+                        </div>
+
+                        <!-- 4BHK Fields -->
+                        <div class="bhk-group">
+                            <div class="mb-3">
+                                <label for="id_flats_4bhk" class="form-label">4BHK Flats</label>
+                                <input type="text" name="flats_4bhk" id="id_flats_4bhk" class="form-control"
+                                    value="{{ form.flats_4bhk.value }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_cost_4bhk" class="form-label">4BHK Cost</label>
+                                <input type="text" name="cost_4bhk" id="id_cost_4bhk" class="form-control"
+                                    value="{{ form.cost_4bhk.value }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add other fields similarly -->
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
-
-            <!-- Repeat for other fields -->
-            <div class="mb-3">
-                <label for="id_address" class="form-label">Address:</label>
-                <textarea name="address" id="id_address" class="form-control">{{ form.address.value }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="id_location" class="form-label">Location:</label>
-                <textarea name="location" id="id_location" class="form-control">{{ form.location.value }}</textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="id_features" class="form-label">Features:</label>
-                <textarea name="features" id="id_features" class="form-control">{{ form.features.value }}</textarea>
-            </div>
-
-            <div class="d-flex bhk-group ">
-                <div class="mb-3 ml-2 bhk-input">
-                    <label for="id_flats_1bhk" class="form-label">1BHK</label>
-                    <input type="text" name="flats_1bhk" id="id_flats_1bhk" class="form-control"
-                        value="{{ form.flats_1bhk.value }}">
-                </div>
-
-                <div class="mb-3 mr-2 bhk-input">
-                    <label for="id_flats_2bhk" class="form-label">2BHK</label>
-                    <input type="text" name="flats_2bhk" id="id_flats_2bhk" class="form-control"
-                        value="{{ form.flats_2bhk.value }}">
-                </div>
-                <div class="mb-3 mr-2 bhk-input">
-                    <label for="id_flats_3bhk" class="form-label">3BHK</label>
-                    <input type="text" name="flats_3bhk" id="id_flats_3bhk" class="form-control"
-                        value="{{ form.flats_3bhk.value }}">
-                </div>
-                <div class="mb-3 mr-2 bhk-input">
-                    <label for="id_flats_4bhk" class="form-label">4BHK</label>
-                    <input type="text" name="flats_4bhk" id="id_flats_4bhk" class="form-control"
-                        value="{{ form.flats_4bhk.value }}">
-                </div>
-            </div>
-
-            <!-- Add other fields similarly -->
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     </div>
 </div>
-
 
 
 {% endblock content %}

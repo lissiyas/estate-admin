@@ -15,9 +15,9 @@
 
 .addproperty-box {
     
-    margin-left: 50%;
+    
     margin-top: 400px;
-    min-width: 700px;
+    max-width: 100%;
     padding: 40px;
     transform: translate(-50%, -50%);
     background: #C3E2C2;
