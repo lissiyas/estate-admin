@@ -1,4 +1,4 @@
-THis is the Realestate admin management
+This is the Real-estate admin management
 
 email: estate@gmail.com
 password: estate
