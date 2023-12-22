@@ -7,45 +7,44 @@
 
 <link rel="stylesheet" href="{% static 'estate_admin/add_or_edit_tenant.css' %}">
 
-
-<div class="container"> 
-<div class="login-box justify-content-center ">
-    <h1>Add New Tenant</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="id_name" class="form-label">Name</label>
-            {{ form.name }}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="login-box">
+                <h1>{% if is_update %}Update Tenant{% else %}Add New Tenant{% endif %}</h1>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_address" class="form-label">Address</label>
+                        {{ form.address }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_property" class="form-label">Property</label>
+                        {{ form.property }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_unit_type" class="form-label">Unit Type</label>
+                        {{ form.unit_type }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_agreement_end_date" class="form-label">Agreement End Date</label>
+                        {{ form.agreement_end_date }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_monthly_rent_date" class="form-label">Monthly Rent Date</label>
+                        {{ form.monthly_rent_date }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="id_address" class="form-label">Address</label>
-            {{ form.address }}
-        </div>
-        <div class="mb-3">
-            <label for="id_property" class="form-label">Property</label>
-            {{ form.property }}
-        </div>
-        <div class="mb-3">
-            <label for="id_unit_type" class="form-label">Unit Type</label>
-            {{ form.unit_type }}
-        </div>
-        
-        <div class="mb-3">
-            <label for="id_agreement_end_date" class="form-label">Agreement End Date</label>
-            {{ form.agreement_end_date }}
-        </div>
-        <div class="mb-3">
-            <label for="id_monthly_rent_date" class="form-label">Monthly Rent Date</label>
-            {{ form.monthly_rent_date }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    
-    
-
-
-
+    </div>
 </div>
-</div>
+
 
 {% endblock content %}

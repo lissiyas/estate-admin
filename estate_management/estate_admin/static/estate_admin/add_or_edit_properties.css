@@ -4,7 +4,7 @@
 
 
 .bhk-group {
-    display: flex;
+    
     justify-content: space-between;
 }
 .bhk-input {
@@ -16,12 +16,11 @@
 .addproperty-box {
     
     
-    margin-top: 400px;
+    margin-top: 40px;
     max-width: 100%;
     padding: 40px;
-    transform: translate(-50%, -50%);
     background: #C3E2C2;
-    box-sizing: border-box;
+   
     border-radius: 10px;
     margin-bottom: 30px;
   }

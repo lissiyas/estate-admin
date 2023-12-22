@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import PropertyForm , TenantForm , SearchForm
@@ -17,6 +18,7 @@ def list_properties(request):
 #----------------------------property addition /updatation-----------------
 @login_required
 def add_or_update_property(request, property_id=None):
+    is_update = property_id is not None
     if property_id:
         property_obj = get_object_or_404(Property, pk=property_id)
         form = PropertyForm(request.POST or None, instance=property_obj)
@@ -29,7 +31,8 @@ def add_or_update_property(request, property_id=None):
     
     context = {
         'form': form,
-        'property': property_obj if property_id else None
+        'property': property_obj if property_id else None,
+        'is_update':is_update
     }
     return render(request, 'estate_admin/add_or_edit_property.html', context)
 
@@ -70,6 +73,7 @@ def list_tenants(request):
 
 
 def add_or_update_tenant(request, tenant_id=None):
+    is_update = tenant_id is not None
     if tenant_id:
         tenant = get_object_or_404(Tenant, pk=tenant_id)
         form = TenantForm(request.POST or None, instance=tenant)
@@ -80,11 +84,15 @@ def add_or_update_tenant(request, tenant_id=None):
     if request.method == 'POST' and form.is_valid():
         form.save()
         return redirect('list_tenants')  # Redirect to the tenant listing page
-
-    return render(request, 'estate_admin/add_or_edit_tenant.html', {
+    
+    context ={
         'form': form,
-        'tenant': tenant
-    })
+        'tenant': tenant,
+        'is_update':is_update
+    }
+
+
+    return render(request, 'estate_admin/add_or_edit_tenant.html', context)
 
 
 @login_required
@@ -102,16 +110,24 @@ def delete_tenant(request , tenant_id):
 def home(request):
     return render(request, 'estate_admin/index.html')
 
-def login_view(request):  # Renamed to avoid conflict with 'login' from django.contrib.auth
+def login_view(request):
     if request.method == "POST":
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
+
+        # Retrieve the username based on the email
+        try:
+            username = User.objects.get(email=email).username
+        except User.DoesNotExist:
+            messages.error(request, 'Invalid email or password.')
+            return render(request, 'estate_admin/index.html')
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth_login(request, user)  # Use auth_login here
-            return redirect('list_properties')  # Redirect to admin dashboard or a different page as required
+            auth_login(request, user)
+            return redirect('list_properties')
         else:
-            messages.error(request, 'Invalid username or password.')
+            messages.error(request, 'Invalid email or password.')
 
     return render(request, 'estate_admin/index.html')
 

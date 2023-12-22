@@ -10,7 +10,7 @@
   <h1 class="mt-4 mb-2">Property List</h1>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for property in properties %}
-      <div class="col">
+      <div class="col mb-4">
         <div class="card h-100"> <!-- Ensure equal height for all cards -->
           <div class="card-body d-flex flex-column"> <!-- Flex column for internal spacing -->
              <!-- Flex for title and button alignment -->
@@ -24,10 +24,10 @@
              <!-- Underline -->
             <p class="card-text">{{ property.features }}</p>
             <h6> Flats Remaining: </h6>
-            <p> 1bkh:-{{ property.flats_1bhk }}</p>
-            <p> 2bkh:-{{ property.flats_2bhk }}</p>
-            <p> 3bkh:-{{ property.flats_3bhk }}</p>
-            <p> 4bkh:-{{ property.flats_4bhk }}</p>
+            <p> 1bkh:-{{ property.flats_1bhk }} <a> 2bkh:-{{ property.flats_2bhk }}</a></p>
+            
+            <p> 3bkh:-{{ property.flats_3bhk }} <a> 4bkh:-{{ property.flats_4bhk }}</a></p>
+            
             
             <!-- Place action buttons at the bottom of the card -->
             <div class="mt-auto pt-2">
