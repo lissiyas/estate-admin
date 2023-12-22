@@ -1,3 +1,70 @@
 body{
     background-color: #F3F8FF;
 }
+
+:root {
+    --color-shadow: #BABECC;
+    --color-white: #FFF;
+  }
+
+  .btn-home{
+    color: #61677C;
+    font-weight: 900;
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px var(--color-white),  5px 5px 20px var(--color-shadow);
+    transition: all 0.2s ease-in-out;
+
+  }
+  .btn-home:hover{
+    box-shadow:-2px -2px 5px var(--color-white), 2px 2px 5px var(--color-shadow);
+   
+
+  }
+
+button {
+    color: #61677C;
+    font-weight: 900;
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px var(--color-white),  5px 5px 20px var(--color-shadow);
+    transition: all 0.2s ease-in-out;
+
+    
+  }
+  
+  button:hover {
+    
+    box-shadow:-2px -2px 5px var(--color-white), 2px 2px 5px var(--color-shadow);
+  }
+
+ 
+  
+  button:active {
+    box-shadow: inset 1px 1px 2px var(--color-white), inset -1px -1px 2px var(--color-shadow);
+  }
+  
+
+  .login{
+    box-shadow: -2px -2px 5px var(--color-white), 5px 5px 20px var(--color-shadow);
+  
+    margin-top: 10%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+    
+  }
+
+  .loggedin{
+    box-shadow: -2px -2px 5px var(--color-white), 5px 5px 20px var(--color-shadow);
+    
+    margin-top: 50px;
+    max-width: 700px;
+    padding: 30px;
+    border-radius: 10px;
+    text-decoration: none;
+
+  }
+
+  .home-menu{
+    margin:4px;
+    text-decoration: none;
+  }

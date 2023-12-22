@@ -1,9 +1,7 @@
 /* Add this to your CSS file or within a <style> tag in your HTML */
 
 
-.container{
-    min-height: 100vh;
-}
+
 
 .bhk-group {
     display: flex;
@@ -15,16 +13,15 @@
 }
 
 
-.login-box {
-    margin-top: 400px;
-    margin-left: 50%;
+.addproperty-box {
     
+    margin-left: 50%;
+    margin-top: 400px;
     min-width: 700px;
     padding: 40px;
     transform: translate(-50%, -50%);
-    background: #EAD196;
+    background: #C3E2C2;
     box-sizing: border-box;
-    
     border-radius: 10px;
     margin-bottom: 30px;
   }

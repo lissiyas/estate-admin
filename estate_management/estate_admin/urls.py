@@ -9,13 +9,17 @@ urlpatterns = [
     path('properties/', views.list_properties, name='list_properties'),
     path('add-properties/', views.add_or_update_property, name='add_property'),
     path('property/update/<int:property_id>/', views.add_or_update_property, name='update_property'),
+    path('properties/<int:property_id>/delete/', views.delete_property, name='delete_property'),
+    path('properties/<int:property_id>/tenants/', views.property_tenants, name='property-tenants'),
+
+    path('list-tenant/', views.list_tenants, name='list_tenants'),
     path('tenant/add/', views.add_or_update_tenant, name='add_tenant'),
     path('tenant/update/<int:tenant_id>/', views.add_or_update_tenant, name='update_tenant'),
-    path('list-tenant/', views.list_tenants, name='list_tenants'),
-    path('logout/', views.logout_view, name='logout'),
-    path('properties/<int:property_id>/tenants/', views.property_tenants, name='property-tenants'),
-    path('properties/<int:property_id>/delete/', views.delete_property, name='delete_property'),
     path('tenants/<int:tenant_id>/delete/', views.delete_tenant, name='delete_tenant'),
+    path('logout/', views.logout_view, name='logout'),
+    
+    
+    
 ]
 
 if settings.DEBUG:

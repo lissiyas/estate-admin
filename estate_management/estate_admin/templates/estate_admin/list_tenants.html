@@ -3,9 +3,24 @@
 
 
 {% block content %}
-
-    <a href="{% url 'add_tenant' %}">Add New tenent</a>
-   
+<link rel="stylesheet" href="{% static 'estate_admin/list_tenants.css' %}">
+<div class="container"> 
+    
+    <form method="get" action="{% url 'list_tenants' %}" class="mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" name="search_query" id="search_query" class="form-control" value="{{ request.GET.search_query }}" placeholder="Search based on unit type and property features">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <div class="mt-4">
+    
    <!--<h2>{{ unit_type }}</h2> -->
    <table border="2" class="table">
     <thead class="table-dark">
@@ -36,14 +51,18 @@
                 <td>{{ tenant.unit_type }}</td>
                 <td>{{ tenant.agreement_end_date }}</td>
                 <td>{{ tenant.monthly_rent_date }}</td>
-                <td><a href="{% url 'update_tenant' tenant_id=tenant.id %}" class="btn btn-info btn-sm d-block d-md-inline-block mb-2 mb-md-0">Update tenant</a></td>
-                <td> <a href="{% url 'delete_tenant' tenant_id=tenant.id %}" class="btn btn-danger btn-sm d-block d-md-inline-block mb-2 mb-md-0">Delete tenant</a> </td>
+                <td><a href="{% url 'update_tenant' tenant_id=tenant.id %}" class="btn equal-btn-width btn-info btn-sm d-block d-md-inline-block mb-2 mb-md-0"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Update tenant</a>
+                 <a href="{% url 'delete_tenant' tenant_id=tenant.id %}" class="btn equal-btn-width btn-danger btn-sm d-block d-md-inline-block mb-2 mb-md-0"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Delete tenant</a> </td>
             </tr>
         {% empty %}
             <!-- Handle empty list if needed -->
         {% endfor %}
     </tbody>
 </table>
+</div>
+</div>
 
      
 

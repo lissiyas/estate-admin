@@ -12,3 +12,17 @@
     border-color:#B1C381 ;
     
   }
+
+
+  .btn-extra-sm {
+    padding: 0.25rem 0.5rem; /* Smaller padding */
+    font-size: 0.75rem; /* Smaller font-size */
+    line-height: 1.5; /* Adjust line height if needed */
+  }
+
+  .equal-btn-width {
+     /* Adjust width as needed */
+    white-space: normal; /* Ensures text wraps inside the button */
+    text-align: center; /* Centers text inside the button */
+    margin-bottom: 5px; /* Adds a small margin at the bottom of each button */
+  }

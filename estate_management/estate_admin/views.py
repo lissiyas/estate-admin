@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import PropertyForm , TenantForm
-from .models import Property, Tenant, UnitType
+from .forms import PropertyForm , TenantForm , SearchForm
+from .models import Property, Tenant
+from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
@@ -47,12 +48,18 @@ def delete_property(request , property_id):
 
 @login_required
 def list_tenants(request):
+    search_query = request.GET.get('search_query', '').strip()
+
     tenants = Tenant.objects.all()
-    tenants_by_unit_type = {}
-    for unit_type in UnitType:
-        tenants_by_unit_type[unit_type.label] = Tenant.objects.filter(unit_type=unit_type.value)
+    if search_query:
+        # Check if the query matches unit types or property names
+        tenants = tenants.filter(
+            Q(unit_type__icontains=search_query) |
+            Q(property__features__icontains=search_query)
+        )
+
     context = {
-        'tenants': tenants,
+        'tenants': tenants
     }
     return render(request, 'estate_admin/list_tenants.html', context)
     
@@ -102,7 +109,7 @@ def login_view(request):  # Renamed to avoid conflict with 'login' from django.c
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)  # Use auth_login here
-            return redirect('home')  # Redirect to admin dashboard or a different page as required
+            return redirect('list_properties')  # Redirect to admin dashboard or a different page as required
         else:
             messages.error(request, 'Invalid username or password.')
 
@@ -111,7 +118,7 @@ def login_view(request):  # Renamed to avoid conflict with 'login' from django.c
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')
 
 
 @login_required
