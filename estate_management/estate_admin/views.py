@@ -12,46 +12,54 @@ def list_properties(request):
     return render(request, 'estate_admin/list_properties.html', {'properties': properties})
 
 
+
+#----------------------------property addition /updatation-----------------
+@login_required
+def add_or_update_property(request, property_id=None):
+    if property_id:
+        property_obj = get_object_or_404(Property, pk=property_id)
+        form = PropertyForm(request.POST or None, instance=property_obj)
+    else:
+        form = PropertyForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('list_properties')  # Redirect to the property listing page
+    
+    context = {
+        'form': form,
+        'property': property_obj if property_id else None
+    }
+    return render(request, 'estate_admin/add_or_edit_property.html', context)
+
+
+@login_required
+def delete_property(request , property_id):
+    property_obj = get_object_or_404(Property, pk=property_id)
+    if request.method == 'POST':
+
+        property_obj.delete()
+        return redirect('list_properties')
+    context = {'property': property_obj}
+    return render(request, 'estate_admin/confirm_delete_property.html', context)
+
+#-------------------------------------------------------------------------------tenants view--------------------------
+
 @login_required
 def list_tenants(request):
+    tenants = Tenant.objects.all()
     tenants_by_unit_type = {}
     for unit_type in UnitType:
         tenants_by_unit_type[unit_type.label] = Tenant.objects.filter(unit_type=unit_type.value)
     context = {
-        'tenants_by_unit_type': tenants_by_unit_type,
+        'tenants': tenants,
     }
     return render(request, 'estate_admin/list_tenants.html', context)
-
-@login_required
-def add_property(request):
-    if request.method == 'POST':
-        form = PropertyForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list_properties')  # redirect to the property listing page
-    else:
-        form = PropertyForm()
-    return render(request, 'estate_admin/add_property.html', {'form': form})
-
-#----------------------------property addition /updatation-----------------
-
-def add_or_update_property(request , property_id = None):
-    if property_id:
-        property = get_object_or_404(Property, pk = property_id)
-        form = PropertyForm(request.POST or None, instance=property)
-    else:
-        property = None
-        form = PropertyForm(request.POST or None)
-
-    if request.method == 'POST' and form.is_valid():
-        form = PropertyForm(request.POST)
-        
-        form.save()
-        return redirect('list_properties')  # redirect to the property listing page
     
-    return render(request, 'estate_admin/add_or_edit_property.html', {'form': form, 'property':property})
 
-#----------------------------tenants addition /updatation-----------------
+
+
+#--tenants addition /updatation
 
 
 def add_or_update_tenant(request, tenant_id=None):
@@ -72,7 +80,15 @@ def add_or_update_tenant(request, tenant_id=None):
     })
 
 
+@login_required
+def delete_tenant(request , tenant_id):
+    tenant_obj = get_object_or_404(Tenant, pk=tenant_id)
+    if request.method == 'POST':
 
+        tenant_obj.delete()
+        return redirect('list_tenants')
+    context = {'tenant': tenant_obj}
+    return render(request, 'estate_admin/confirm_delete_tenant.html', context)
 
 
 

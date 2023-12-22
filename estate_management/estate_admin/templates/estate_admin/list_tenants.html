@@ -4,38 +4,47 @@
 
 {% block content %}
 
-<h1>Property List</h1>
     <a href="{% url 'add_tenant' %}">Add New tenent</a>
-    {% for unit_type, tenants in tenants_by_unit_type.items %}
-    <h2>{{ unit_type }}</h2>
-    <table>
+   
+   <!--<h2>{{ unit_type }}</h2> -->
+   <table border="2" class="table">
+    <thead class="table-dark">
         <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Property</th>
-            <th>Agreement End Date</th>
-            <th>Monthly Rent Date</th>
+            <th scope="col">Sl No:</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Property</th>
+            <th scope="col">Unit Type</th>
+            <th scope="col">Agreement End Date</th>
+            <th scope="col">Monthly Rent Date</th>
+            <th scope="col">Option</th>
         </tr>
+    </thead>
+    <tbody>
         {% for tenant in tenants %}
-        <tr>
-            <td>{{ tenant.name }}</td>
-            <td>{{ tenant.address }}</td>
-            <td>
-                {% if tenant.property %}
-                    {{ tenant.property.name }}
-                {% else %}
-                    No Property
-                {% endif %}
-            </td>
-            <td>{{ tenant.agreement_end_date }}</td>
-            <td>{{ tenant.monthly_rent_date }}</td>
-        </tr>
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ tenant.name }}</td>
+                <td>{{ tenant.address }}</td>
+                <td>
+                    {% if tenant.property %}
+                        {{ tenant.property.name }}
+                    {% else %}
+                        No Property
+                    {% endif %}
+                </td>
+                <td>{{ tenant.unit_type }}</td>
+                <td>{{ tenant.agreement_end_date }}</td>
+                <td>{{ tenant.monthly_rent_date }}</td>
+                <td><a href="{% url 'update_tenant' tenant_id=tenant.id %}" class="btn btn-info btn-sm d-block d-md-inline-block mb-2 mb-md-0">Update tenant</a></td>
+                <td> <a href="{% url 'delete_tenant' tenant_id=tenant.id %}" class="btn btn-danger btn-sm d-block d-md-inline-block mb-2 mb-md-0">Delete tenant</a> </td>
+            </tr>
+        {% empty %}
+            <!-- Handle empty list if needed -->
         {% endfor %}
-    </table>
-{% endfor %}
+    </tbody>
+</table>
 
-  
-        </div>
-        
+     
 
 {% endblock content %}

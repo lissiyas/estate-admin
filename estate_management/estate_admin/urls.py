@@ -14,6 +14,8 @@ urlpatterns = [
     path('list-tenant/', views.list_tenants, name='list_tenants'),
     path('logout/', views.logout_view, name='logout'),
     path('properties/<int:property_id>/tenants/', views.property_tenants, name='property-tenants'),
+    path('properties/<int:property_id>/delete/', views.delete_property, name='delete_property'),
+    path('tenants/<int:tenant_id>/delete/', views.delete_tenant, name='delete_tenant'),
 ]
 
 if settings.DEBUG:

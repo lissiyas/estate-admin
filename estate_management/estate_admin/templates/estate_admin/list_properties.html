@@ -17,10 +17,9 @@
               <p class="card-text">{{ property.address }}</p>
               <p class="card-text">{{ property.location }}</p>
              
-              <a href="{% url 'update_property' property_id=property.id %}"><button type="button" class="btn btn-sm btn-danger">Update Property</button></a>
-              <a href="{% url 'property-tenants' property_id=property.id %}"><button type="button" class="btn  btn-sm btn-success">Show Tenants</button>
-              </a>
-              
+              <a href="{% url 'update_property' property_id=property.id %}" class="btn btn-info btn-sm d-block d-md-inline-block mb-2 mb-md-0">Update Property</a>
+              <a href="{% url 'property-tenants' property_id=property.id %}" class="btn btn-success btn-sm d-block d-md-inline-block mb-2 mb-md-0">Show Tenants</a>
+              <a href="{% url 'delete_property' property_id=property.id %}" class="btn btn-danger btn-sm d-block d-md-inline-block mb-2 mb-md-0">Delete Property</a>
             </div>
             
           </div>

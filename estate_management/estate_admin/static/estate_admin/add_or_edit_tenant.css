@@ -1,0 +1,15 @@
+
+
+.login-box {
+    margin-top: 500px;
+    margin-left: 50%;
+    
+    min-width: 700px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: #EAD196;
+    box-sizing: border-box;
+    
+    border-radius: 10px;
+    margin-bottom: 30px;
+  }

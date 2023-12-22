@@ -1,0 +1,17 @@
+
+{% extends "estate_admin/index.html" %}
+{% load static %}
+
+
+{% block content %}
+<h1>Confirm Delete Property</h1>
+<p>Are you sure you want to delete the property "{{ tenant.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+</form>
+
+<a href="{% url 'list_tenants' %}">Cancel</a>
+
+{% endblock content %}
