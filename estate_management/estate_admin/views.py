@@ -47,6 +47,22 @@ def delete_property(request , property_id):
     context = {'property': property_obj}
     return render(request, 'estate_admin/confirm_delete_property.html', context)
 
+
+@login_required
+def property_tenants(request, property_id):
+    # Get the property object
+    property_obj = get_object_or_404(Property, pk=property_id)
+
+    # Get tenants for this property
+    tenants = Tenant.objects.filter(property=property_obj)
+
+    context = {
+        'property': property_obj,
+        'tenants': tenants,
+    }
+    return render(request, 'estate_admin/property_tenants.html', context)
+
+
 #-------------------------------------------------------------------------------tenants view--------------------------
 
 @login_required
@@ -71,7 +87,7 @@ def list_tenants(request):
 
 #--tenants addition /updatation
 
-
+@login_required
 def add_or_update_tenant(request, tenant_id=None):
     is_update = tenant_id is not None
     if tenant_id:
@@ -137,16 +153,3 @@ def logout_view(request):
     return redirect('login')
 
 
-@login_required
-def property_tenants(request, property_id):
-    # Get the property object
-    property_obj = get_object_or_404(Property, pk=property_id)
-
-    # Get tenants for this property
-    tenants = Tenant.objects.filter(property=property_obj)
-
-    context = {
-        'property': property_obj,
-        'tenants': tenants,
-    }
-    return render(request, 'estate_admin/property_tenants.html', context)
