@@ -32,6 +32,7 @@
             <th scope="col">Property</th>
             <th scope="col">Unit Type</th>
             <th scope="col">rent cost</th>
+            <th scope="col">Agreement Document</th>
             <th scope="col">Agreement End Date</th>
             <th scope="col">Monthly Rent Date</th>
             <th scope="col">Option</th>
@@ -52,6 +53,15 @@
                 </td>
                 <td>{{ tenant.unit_type }}</td>
                 <td>{{ tenant.rent_cost }}</td>
+                <td>
+                    {% if tenant.document %}
+                        <a href="{{ tenant.document.url }}" download="{{ tenant.document.name }}">Download PDF</a>
+                    {% else %}
+                        No Document
+                    {% endif %}
+                </td>
+                
+
                 <td>{{ tenant.agreement_end_date }}</td>
                 <td>{{ tenant.monthly_rent_date }}</td>
                 <td><a href="{% url 'update_tenant' tenant_id=tenant.id %}" class="btn equal-btn-width btn-info btn-sm d-block d-md-inline-block mb-2 mb-md-0"

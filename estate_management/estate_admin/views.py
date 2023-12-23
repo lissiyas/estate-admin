@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import PropertyForm , TenantForm , SearchForm
+from .forms import PropertyForm , TenantForm 
 from .models import Property, Tenant
 from django.db.models import Q
 

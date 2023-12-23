@@ -53,6 +53,7 @@ class Tenant(models.Model):
     agreement_end_date = models.DateField(default=datetime.date.today)
     monthly_rent_date = models.DateField(default=datetime.date.today)
     rent_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    document = models.FileField(upload_to='tenant_documents', null=True, blank=True)  
 
     def __str__(self):
         return f"{self.name} - {self.property.name if self.property else 'No Property'} - {self.unit_type}"
@@ -61,7 +62,6 @@ class Tenant(models.Model):
         if self.property and self.unit_type:
             self.rent_cost = self.property.get_cost_for_flat_type(self.unit_type)
         super(Tenant, self).save(*args, **kwargs)
-    #document = models.FileField(upload_to='tenant_documents/', null=True, blank=True)  # Updated upload path
-
+    
    
 
