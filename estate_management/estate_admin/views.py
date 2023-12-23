@@ -92,7 +92,7 @@ def add_or_update_tenant(request, tenant_id=None):
     is_update = tenant_id is not None
     if tenant_id:
         tenant = get_object_or_404(Tenant, pk=tenant_id)
-        form = TenantForm(request.POST or None, instance=tenant)
+        form = TenantForm(request.POST or None, request.FILES or None, instance=tenant)
     else:
         tenant = None
         form = TenantForm(request.POST or None)
