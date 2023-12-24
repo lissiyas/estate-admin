@@ -4,8 +4,8 @@ email: estate@gmail.com \
 password: estate
 
 
-framework: python django\
-frontend:- django templates\
+framework: python django \
+frontend:- django templates \
 database- sqlite
 
 
